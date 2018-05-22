@@ -21,3 +21,60 @@
 .RButton {
   justify-self: end;
 }
+
+.timer {
+  display: grid;
+  grid-template-columns: 1fr, 250px, 250px, 1fr;
+  grid-template-rows: 70px, 400px, 80px, 50px, 70px, 70px;
+}
+
+.logo {
+  grid-column: 2 / 4;
+}
+
+#timerTop {
+  grid-column: 2 / 4;
+  grid-row: 2;
+  background-color: #c3cee5;
+}
+
+.readout {
+  grid-column: 2 / 4;
+  grid-row: 3;
+  background-color: #c3cee5;
+}
+
+#timerMiddle {
+  grid-column: 2 / 4;
+  grid-row: 4;
+  background-color: #c3cee5;
+}
+
+.break {
+  grid-column: 2;
+  grid-row: 5;
+  background-color: #c3cee5;
+}
+
+.timeLeft {
+  grid-column: 3;
+  grid-row: 5;
+  background-color: #c3cee5;
+}
+
+#timerBottom {
+  grid-column: 2 / 4;
+  grid-row: 6;
+  background-color: #c3cee5;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.work {
+}
+
+.rest {
+}
