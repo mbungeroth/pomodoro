@@ -1,3 +1,23 @@
-h1  {
-  color: red;
+.navbar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 80px;
+  background-color: #2a2a2b;
+  color: #7f7f9b;
+}
+
+.brand, .reset {
+  background-color: inherit;
+  color: inherit;
+  height: 80px;
+  width: 140px;
+  border: none;
+}
+
+.LButton {
+  self: start;
+}
+
+.RButton {
+  justify-self: end;
 }
