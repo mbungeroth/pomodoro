@@ -3,27 +3,48 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Baloo+Chettan|Gloria+Hallelujah" rel="stylesheet">
     <title></title>
   </head>
   <body>
+
     <div class="navbar">
-      <div class="LButton"><button class="brand" type="button" name="Pomodoro">Pomodoro</button></div>
-      <div class="RButton"><button class="reset" type="button" name="Reset">Reset</button></div>
+      <div class="LButton">
+        <button class="brand" type="button" name="Pomodoro">Pomodoro</button>
+      </div>
+      <div class="RButton">
+        <button class="reset" type="button" name="Reset">Reset</button>
+      </div>
     </div>
 
     <div class="timer">
-      <div class="logo">POMODORO</div>
-      <div class="timer" id="timerTop"></div>
-      <div class="readout">25:00</div>
-      <div class="timer" id="timerMiddle">minutes remaining</div>
+      <div class="logo">
+        <img class="tomato" src="./images/tomato.png">
+        POMODORO TIMER
+        <img class="tomato" src="./images/tomato.png">
+      </div>
+
+      <div class="readout"><span id="timeLeft">25:00</span></div>
+      <div class="timerMiddle">minutes remaining</div>
       <div class="break">next break -></div>
       <div class="timeLeft">3:00</div>
-      <div class="timer" id="timerBottom"></div>
     </div>
 
     <div class="buttons">
-      <div class="work"><button type="button" name="button">Set Work Interval</button></div>
-      <div class="rest"><button type="button" name="button">Set Rest Interval</button></div>
+      <div class="work">
+        <button type="button" name="button">
+          <span class="adjusters">Set Work Interval</span>
+        </button>
+      </div>
+      <div class="rest">
+        <button type="button" name="button">
+          <span class="adjusters">Set Break Interval</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="start">
+      <button class="sButton" type="button" name="button">START!</button>
     </div>
 
     <script type="text/javascript" src="pomodoro.js"></script>

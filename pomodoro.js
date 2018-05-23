@@ -1,1 +1,1 @@
-// alert("testing");
+let timer = document.getElementById('timeLeft').textContent;

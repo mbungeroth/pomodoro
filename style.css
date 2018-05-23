@@ -1,9 +1,15 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 .navbar {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 80px;
+  grid-template-rows: 73px;
   background-color: #2a2a2b;
-  color: #7f7f9b;
+  color: white;
+  min-width: 425px
 }
 
 .brand, .reset {
@@ -12,10 +18,13 @@
   height: 80px;
   width: 140px;
   border: none;
+  font-family: 'Baloo Chettan', cursive;
+  font-size: 2em;
 }
 
 .LButton {
-  self: start;
+  justify-self: start;
+  margin-left: 24px;
 }
 
 .RButton {
@@ -24,57 +33,95 @@
 
 .timer {
   display: grid;
-  grid-template-columns: 1fr, 250px, 250px, 1fr;
-  grid-template-rows: 70px, 400px, 80px, 50px, 70px, 70px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 50px 233px 55px 93px;
 }
 
 .logo {
   grid-column: 2 / 4;
+  grid-row: 1;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 2em;
+  min-width: 425px;
+  margin-top: 40px;
+  justify-self: center;
 }
 
-#timerTop {
-  grid-column: 2 / 4;
-  grid-row: 2;
-  background-color: #c3cee5;
+.tomato {
+  width: 50px;
 }
 
 .readout {
   grid-column: 2 / 4;
-  grid-row: 3;
-  background-color: #c3cee5;
+  grid-row: 2;
+  font-family: 'Amatic SC', cursive;
+  font-size: 13em;
+  justify-self: center;
+  margin-top: 15px;
 }
 
-#timerMiddle {
-  grid-column: 2 / 4;
-  grid-row: 4;
-  background-color: #c3cee5;
+.timerMiddle {
+  grid-column: 3;
+  grid-row: 3;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 1em;
+  min-width: 150px;
 }
 
 .break {
   grid-column: 2;
-  grid-row: 5;
-  background-color: #c3cee5;
+  grid-row: 4;
+  justify-self: end;
+  padding-right: 15px;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 1.3em;
+  padding-top: 4px;
+  min-width: 150px;
+  padding-right: 0;
 }
 
 .timeLeft {
   grid-column: 3;
-  grid-row: 5;
-  background-color: #c3cee5;
-}
-
-#timerBottom {
-  grid-column: 2 / 4;
-  grid-row: 6;
-  background-color: #c3cee5;
+  grid-row: 4;
+  font-family: 'Amatic SC', cursive;
+  font-size: 2.5em;
 }
 
 .buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 32px;
 }
 
 .work {
+  justify-self: end
 }
 
-.rest {
+button {
+  border: 1px solid #423837;
+  background-color: #423837;
+  color: white;
+  border-radius: 14px;
+  height: 71px;
+  width: 131px;
+  word-spacing: 131px;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 1em;
+  line-height: 120%;
+}
+
+.start {
+  display: flex;
+  justify-content: center;
+  margin-top: 33px;
+}
+
+.sButton {
+  background-color: #f71515;
+  border: 1px solid #f71515;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 5em;
+  width: 356px;
+  height: 144px;
+  border-radius: 29px;
 }
