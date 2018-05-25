@@ -28,14 +28,12 @@ function displayTime(timeRemaining) {
 }
 
 function decreaseTimer() {
-  let decreaser = setTimeout(function decreaseTime() {
+  let decreaser = setInterval(function() {
     if (cancelled === false) {
       timeRemaining -= 1;
-      timer.textContent = displayTime(timeRemaining)
-      decreaser = setTimeout(decreaseTime, 1000);
+      timer.textContent = displayTime(timeRemaining);
     } else {
-      timeRemaining = 1500;
-      displayTime(timeRemaining);
+      clearInterval(decreaser);
       return;
     }
   }, 1000);
@@ -44,4 +42,6 @@ function decreaseTimer() {
 
 function resetTime() {
   cancelled = true;
+  timeRemaining = 1500;
+  timer.textContent = displayTime(timeRemaining);
 }
