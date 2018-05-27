@@ -3,6 +3,8 @@ const start = document.getElementById('sButton');
 const reset = document.getElementById('reset');
 const breakText = document.getElementById('breakText');
 const nextTime = document.getElementById('nextTime');
+const workSet = document.getElementById('workSet');
+const breakSet = document.getElementById('breakSet');
 
 let shortBreakTime = 180; //180
 let longBreakTime = 900; //900
@@ -14,6 +16,8 @@ let onBreak = false;
 
 start.addEventListener('click', startTimer);
 reset.addEventListener('click', resetTimer);
+workSet.addEventListener('click', changeWorkTime);
+breakSet.addEventListener('click', changeBreakTime);
 
 function displayTime(timeRemaining) {
   let minutes = Math.floor(timeRemaining / 60);
@@ -105,4 +109,60 @@ function longBreak() {
       startTimer();
     }
   }, 1000);
+}
+
+function changeWorkTime() {
+  let newWorkTime = parseInt(prompt(`Your current working time is ` +
+                             `${displayTime(workPeriodTime)}. ` +
+                             'Please enter a new number of minutes ' +
+                             'for your work periods.'));
+  if (newWorkTime < 2) {
+    alert('That work period is too short.');
+  } else if (newWorkTime > 45) {
+    alert('That work period is too long.');
+  } else if (isNaN(newWorkTime)) {
+    alert('You need to chose an integer for the number of minutes.');
+  }
+
+  if (newWorkTime >= 2 && newWorkTime <= 45) {
+    workPeriodTime = newWorkTime * 60;
+    timeRemaining = workPeriodTime;
+    timer.textContent = displayTime(timeRemaining);
+    alert("Click 'start' to start a work period with your new chosen time");
+  }
+}
+
+function changeBreakTime() {
+  let newBreakTime = parseInt(prompt(`Your current short break time is ` +
+                             `${displayTime(shortBreakTime)}. ` +
+                             'Please enter a new number of minutes ' +
+                             'for your short breaks.'));
+  if (newBreakTime < 1) {
+    alert('That break length is too short.');
+  } else if (newBreakTime > 15) {
+    alert('That break length is too long.');
+  } else if (isNaN(newBreakTime)) {
+    alert('You need to chose an integer for the number of minutes.');
+  }
+
+  if (newBreakTime >= 1 && newBreakTime <= 15) {
+    shortBreakTime = newBreakTime * 60;
+    nextTime.textContent = displayTime(shortBreakTime);
+  }
+
+  let newLongBreakTime = parseInt(prompt(`Your current long break time is ` +
+                             `${displayTime(longBreakTime)}. ` +
+                             'Please enter a new number of minutes ' +
+                             'for your long breaks.'));
+  if (newLongBreakTime < 3) {
+    alert('That break length is too short.');
+  } else if (newLongBreakTime > 30) {
+    alert('That break length is too long.');
+  } else if (isNaN(newLongBreakTime)) {
+    alert('You need to chose an integer for the number of minutes.');
+  }
+
+  if (newLongBreakTime >= 3 && newLongBreakTime <= 30) {
+    longBreakTime = newBreakTime * 60;
+  }
 }
