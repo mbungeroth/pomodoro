@@ -66,10 +66,11 @@ body, html {
 .readout {
   grid-column: 2 / 4;
   grid-row: 2;
-  font-family: 'Amatic SC', cursive;
+  font-family: 'Cutive Mono', monospace;
   font-size: 13em;
   justify-self: center;
   margin-top: 15px;
+  letter-spacing: -40px;
 }
 
 .timerMiddle {
@@ -78,6 +79,7 @@ body, html {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1em;
   min-width: 150px;
+  padding-left: 81px;
 }
 
 .break {
@@ -146,9 +148,4 @@ button {
 #sButton {
   opacity: 1;
   grid-row: 1;
-}
-
-#timeLeft {
-  resize: none;
-  letter-spacing: 3px;
 }
