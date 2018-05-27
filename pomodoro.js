@@ -8,9 +8,9 @@ const breakSet = document.getElementById('breakSet');
 const brand = document.getElementById('reload');
 const pause = document.getElementById('pButton');
 
-let shortBreakTime = 180; //180
-let longBreakTime = 900; //900
-let workPeriodTime = 1500; //1500
+let shortBreakTime = 180;
+let longBreakTime = 900;
+let workPeriodTime = 1500;
 let cancelled = false;
 let timeRemaining = workPeriodTime;
 let workInterval = 1
@@ -42,6 +42,7 @@ function startTimer() {
   pause.style.opacity = 1;
   start.style.gridRow = 2;
   pause.style.gridRow = 1;
+  start.removeEventListener('click', startTimer);
   decreaseTimer();
 }
 
@@ -53,10 +54,12 @@ function decreaseTimer() {
 
       if (timeRemaining === 0 && workInterval < 4) {
         clearInterval(decreaser);
+        alert('Stop working! Take a break!');
         workInterval++;
         shortBreak();
       } else if (timeRemaining === 0 && workInterval === 4) {
         clearInterval(decreaser);
+        alert('Stop working! Take a break!');
         workInterval = 1;
         longBreak();
       }
@@ -74,6 +77,7 @@ function pauseTimer() {
   pause.style.opacity = 0;
   start.style.gridRow = 1;
   pause.style.gridRow = 2;
+  start.addEventListener('click', startTimer);
 }
 
 function resetTimer() {
@@ -86,6 +90,7 @@ function resetTimer() {
 
 function shortBreak() {
   onBreak = true;
+  pause.style.opacity = 0;
   breakText.textContent = 'next work session ->';
   nextTime.textContent = displayTime(workPeriodTime);
   timeRemaining = shortBreakTime;
@@ -143,7 +148,6 @@ function changeWorkTime() {
     workPeriodTime = newWorkTime * 60;
     timeRemaining = workPeriodTime;
     timer.textContent = displayTime(timeRemaining);
-    alert("Click 'start' to start a work period with your new chosen time");
   }
 }
 
