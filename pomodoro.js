@@ -5,6 +5,7 @@ const breakText = document.getElementById('breakText');
 const nextTime = document.getElementById('nextTime');
 const workSet = document.getElementById('workSet');
 const breakSet = document.getElementById('breakSet');
+const brand = document.getElementById('reload');
 
 let shortBreakTime = 180; //180
 let longBreakTime = 900; //900

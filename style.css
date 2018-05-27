@@ -2,6 +2,11 @@ button:active {
    outline:none !important;
 }
 
+a, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
 body, html {
   margin: 0;
   padding: 0;
