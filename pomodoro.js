@@ -6,6 +6,7 @@ const nextTime = document.getElementById('nextTime');
 const workSet = document.getElementById('workSet');
 const breakSet = document.getElementById('breakSet');
 const brand = document.getElementById('reload');
+const pause = document.getElementById('pButton');
 
 let shortBreakTime = 180; //180
 let longBreakTime = 900; //900
@@ -19,6 +20,7 @@ start.addEventListener('click', startTimer);
 reset.addEventListener('click', resetTimer);
 workSet.addEventListener('click', changeWorkTime);
 breakSet.addEventListener('click', changeBreakTime);
+pause.addEventListener('click', pauseTimer);
 
 function displayTime(timeRemaining) {
   let minutes = Math.floor(timeRemaining / 60);
@@ -36,6 +38,10 @@ function displayTime(timeRemaining) {
 
 function startTimer() {
   cancelled = false;
+  start.style.opacity = 0;
+  pause.style.opacity = 1;
+  start.style.gridRow = 2;
+  pause.style.gridRow = 1;
   decreaseTimer();
 }
 
@@ -60,6 +66,14 @@ function decreaseTimer() {
       return;
     }
   }, 1000);
+}
+
+function pauseTimer() {
+  cancelled = true;
+  start.style.opacity = 1;
+  pause.style.opacity = 0;
+  start.style.gridRow = 1;
+  pause.style.gridRow = 2;
 }
 
 function resetTimer() {

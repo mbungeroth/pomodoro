@@ -34,6 +34,7 @@ body, html {
 .LButton {
   justify-self: start;
   margin-left: 24px;
+  padding-top: 20px;
 }
 
 .RButton {
@@ -120,12 +121,12 @@ button {
 }
 
 .start {
-  display: flex;
+  display: grid;
   justify-content: center;
   margin-top: 33px;
 }
 
-#sButton {
+#sButton, #pButton {
   background-color: #f71515;
   border: 1px solid #f71515;
   font-family: 'Gloria Hallelujah', cursive;
@@ -133,4 +134,14 @@ button {
   width: 356px;
   height: 144px;
   border-radius: 29px;
+}
+
+#pButton {
+  opacity: 0;
+  grid-row: 2;
+}
+
+#sButton {
+  opacity: 1;
+  grid-row: 1;
 }
