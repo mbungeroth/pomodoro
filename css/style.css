@@ -34,10 +34,14 @@ body, html {
   font-size: 2em;
 }
 
+#reset {
+  width: 300px;
+}
+
 .LButton {
   justify-self: start;
   margin-left: 24px;
-  padding-top: 20px;
+  padding-top: 17px;
 }
 
 .RButton {

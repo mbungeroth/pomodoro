@@ -19,7 +19,7 @@ const audio = new Audio('sounds/ding.wav');
 
 let shortBreakTime = 180;
 let longBreakTime = 900;
-let workPeriodTime = 5; //1500
+let workPeriodTime = 1500;
 let cancelled = false;
 let timeRemaining = workPeriodTime;
 let workInterval = 1
@@ -67,12 +67,12 @@ function decreaseTimer() {
         clearInterval(decreaser);
         audio.play();
         workInterval++;
-        takeShortBreak();
+        takeBreak('short');
       } else if (timeRemaining === 0 && workInterval === 4) {
         clearInterval(decreaser);
         audio.play();
         workInterval = 1;
-        takeLongBreak();
+        takeBreak('long');
       }
 
     } else {
@@ -96,21 +96,26 @@ function pauseTimer() {
 function resetTimer() {
   if (onBreak === false) {
     cancelled = true;
+    start.style.opacity = 1;
+    pause.style.opacity = 0;
+    start.style.gridRow = 1;
+    pause.style.gridRow = 2;
+    start.addEventListener('click', startTimer);
     timeRemaining = workPeriodTime;
     timer.textContent = displayTime(timeRemaining);
   }
 }
 
 
-function takeShortBreak() {
+function takeBreak(type) {
+  timeRemaining = type === 'short'? shortBreakTime : longBreakTime;
   onBreak = true;
   pause.style.opacity = 0;
   pause.removeEventListener('click', pauseTimer);
   breakText.textContent = "you're on break...";
   nextBreak.textContent = "relax...";
-  longBreakText.textContent = "";
-  nextLongBreak.textContent = "";
-  timeRemaining = shortBreakTime;
+  longBreakText.style.opacity = 0;
+  nextLongBreak.style.opacity = 0;
 
   const breakDecreaser = setInterval(function() {
     timeRemaining -= 1;
@@ -120,8 +125,8 @@ function takeShortBreak() {
       audio.play();
       breakText.textContent = 'short break length ->';
       nextBreak.textContent = displayTime(shortBreakTime);
-      longBreakText.textContent = 'long break length ->';
-      nextLongBreak.textContent = displayTime(longBreakTime);
+      longBreakText.style.opacity = 1;
+      nextLongBreak.style.opacity = 1;
       timeRemaining = workPeriodTime;
       pause.addEventListener('click', pauseTimer);
       startTimer();
@@ -129,28 +134,6 @@ function takeShortBreak() {
   }, 1000);
 }
 
-
-function takeLongBreak() {
-  onBreak = true;
-  pause.removeEventListener('click', pauseTimer);
-  breakText.textContent = "you're on break...";
-  nextBreak.textContent = "relax...";
-  timeRemaining = longBreakTime;
-
-  const longBreakDecreaser = setInterval(function() {
-    timeRemaining -= 1;
-    timer.textContent = displayTime(timeRemaining);
-    if (timeRemaining === 0) {
-      audio.play();
-      clearInterval(longBreakDecreaser);
-      breakText.textContent = 'short break length ->';
-      nextBreak.textContent = displayTime(shortBreakTime);
-      timeRemaining = workPeriodTime;
-      pause.addEventListener('click', pauseTimer);
-      startTimer();
-    }
-  }, 1000);
-}
 
 function changeShortBreak() {
   shortBreakTime = Number(event.target.value) * 60;
@@ -158,6 +141,7 @@ function changeShortBreak() {
     nextBreak.textContent = displayTime(shortBreakTime);
   }
 }
+
 
 function changeLongBreak() {
   longBreakTime = Number(event.target.value) * 60;
