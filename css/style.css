@@ -206,8 +206,14 @@ body, html {
 #sButton {
   opacity: 1;
   grid-row: 1;
+  display: block;
 }
 
 #nextTime {
   padding-left: 15px;
+}
+
+.footer {
+  width: 600px;
+  margin: 0 auto;
 }
