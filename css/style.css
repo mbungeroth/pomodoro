@@ -1,5 +1,6 @@
-:focus, a:focus, #reset:focus {
-  color: #7caeff;
+:focus, a:focus, #reset:focus, .dropbtn:focus, .dropbtn-two:focus,
+#sButton:focus, #pButton:focus {
+  color: #9842f4;
   outline: none;
 }
 
@@ -46,7 +47,7 @@ body, html {
 .timer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 50px 233px 55px 93px;
+  grid-template-rows: 50px 233px 55px 49px 49px;
 }
 
 .logo {
@@ -83,46 +84,97 @@ body, html {
   padding-left: 57px;
 }
 
-.break {
+#breakText, #longBreakText {
   grid-column: 2;
-  grid-row: 4;
   justify-self: end;
-  padding-right: 15px;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1.3em;
   padding-top: 4px;
-  min-width: 150px;
+  min-width: 216px;
   padding-right: 0;
 }
 
-.timeLeft {
-  grid-column: 3;
+#breakText {
   grid-row: 4;
+}
+
+#longBreakText {
+  grid-row: 5;
+}
+
+#nextBreak, #nextLongBreak {
+  grid-column: 3;
   font-family: 'Amatic SC', cursive;
   font-size: 2.5em;
+  padding-left: 10px;
 }
 
-.buttons {
+#nextBreak {
+  grid-row: 4;
+}
+
+#nextlongBreak {
+  grid-row: 5;
+}
+
+.break-buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 32px;
+  grid-column-gap: 24px;
+  padding-top: 10px;
 }
 
-.work {
-  justify-self: end
+.dropbtn, .dropbtn-two {
+    background-color: #3c82f2;
+    color: white;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 1.1em;
+    border: 2px solid #3c82f2;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    word-spacing: 120px;
+    line-height: 1.4;
+    height: 78px;
 }
 
-button {
-  border: 1px solid #423837;
-  background-color: #423837;
-  color: white;
-  border-radius: 14px;
-  height: 71px;
-  width: 131px;
-  word-spacing: 131px;
-  font-family: 'Gloria Hallelujah', cursive;
-  font-size: 1em;
-  line-height: 120%;
+.dropdown {
+  justify-self: end;
+}
+
+.dropdown-two {
+  justify-self: start;
+}
+
+.dropdown-content, .dropdown-content-two {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content, .dropdown-two:hover .dropdown-content-two {
+    display: block;
+}
+
+.dropdown:hover .dropbtn, .dropdown-two:hover .dropbtn-two {
+    background-color: #1d437f;
+}
+
+.dropdown-content button:hover, .dropdown-content-two button:hover {
+  background-color: #f1f1f1
+}
+
+.dropdown-content button, .dropdown-content-two button  {
+    color: black;
+    padding: 12px;
+    display: block;
+    border: none;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 1em;
+    min-width: 160px;
 }
 
 #start {
@@ -133,6 +185,7 @@ button {
 
 #sButton, #pButton {
   background-color: #f71515;
+  color: white;
   border: 1px solid #f71515;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 5em;

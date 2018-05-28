@@ -2,16 +2,24 @@ const timer = document.getElementById('timeLeft');
 const start = document.getElementById('sButton');
 const reset = document.getElementById('reset');
 const breakText = document.getElementById('breakText');
-const nextTime = document.getElementById('nextTime');
-const workSet = document.getElementById('workSet');
-const breakSet = document.getElementById('breakSet');
+const nextBreak = document.getElementById('nextBreak');
+const longBreakText = document.getElementById('longBreakText');
+const nextLongBreak = document.getElementById('nextLongBreak');
 const brand = document.getElementById('reload');
 const pause = document.getElementById('pButton');
+const shortBreaks = [document.getElementById('min3'),
+                     document.getElementById('min4'),
+                     document.getElementById('min5')];
+const longBreaks = [document.getElementById('min15'),
+                    document.getElementById('min20'),
+                    document.getElementById('min25'),
+                    document.getElementById('min30')];
 const audio = new Audio('sounds/ding.wav');
+
 
 let shortBreakTime = 180;
 let longBreakTime = 900;
-let workPeriodTime = 1500;
+let workPeriodTime = 5; //1500
 let cancelled = false;
 let timeRemaining = workPeriodTime;
 let workInterval = 1
@@ -19,9 +27,9 @@ let onBreak = false;
 
 start.addEventListener('click', startTimer);
 reset.addEventListener('click', resetTimer);
-workSet.addEventListener('click', changeWorkTime);
-breakSet.addEventListener('click', changeBreakTime);
 pause.addEventListener('click', pauseTimer);
+shortBreaks.forEach(elem => elem.addEventListener('click', changeShortBreak));
+longBreaks.forEach(elem => elem.addEventListener('click', changeLongBreak));
 
 function displayTime(timeRemaining) {
   let minutes = Math.floor(timeRemaining / 60);
@@ -37,6 +45,7 @@ function displayTime(timeRemaining) {
   return `${minutes}:${seconds}`;
 }
 
+
 function startTimer() {
   cancelled = false;
   start.style.opacity = 0;
@@ -46,6 +55,7 @@ function startTimer() {
   start.removeEventListener('click', startTimer);
   decreaseTimer();
 }
+
 
 function decreaseTimer() {
   const decreaser = setInterval(function() {
@@ -57,12 +67,12 @@ function decreaseTimer() {
         clearInterval(decreaser);
         audio.play();
         workInterval++;
-        shortBreak();
+        takeShortBreak();
       } else if (timeRemaining === 0 && workInterval === 4) {
         clearInterval(decreaser);
         audio.play();
         workInterval = 1;
-        longBreak();
+        takeLongBreak();
       }
 
     } else {
@@ -71,6 +81,7 @@ function decreaseTimer() {
     }
   }, 1000);
 }
+
 
 function pauseTimer() {
   cancelled = true;
@@ -81,6 +92,7 @@ function pauseTimer() {
   start.addEventListener('click', startTimer);
 }
 
+
 function resetTimer() {
   if (onBreak === false) {
     cancelled = true;
@@ -89,12 +101,15 @@ function resetTimer() {
   }
 }
 
-function shortBreak() {
+
+function takeShortBreak() {
   onBreak = true;
   pause.style.opacity = 0;
   pause.removeEventListener('click', pauseTimer);
-  breakText.textContent = "you're on break ->";
-  nextTime.textContent = "relax...";
+  breakText.textContent = "you're on break...";
+  nextBreak.textContent = "relax...";
+  longBreakText.textContent = "";
+  nextLongBreak.textContent = "";
   timeRemaining = shortBreakTime;
 
   const breakDecreaser = setInterval(function() {
@@ -103,12 +118,10 @@ function shortBreak() {
     if (timeRemaining === 0) {
       clearInterval(breakDecreaser);
       audio.play();
-      breakText.textContent = 'next break ->';
-      if (workInterval < 4) {
-        nextTime.textContent = displayTime(shortBreakTime);
-      } else {
-        nextTime.textContent = displayTime(longBreakTime);
-      }
+      breakText.textContent = 'short break length ->';
+      nextBreak.textContent = displayTime(shortBreakTime);
+      longBreakText.textContent = 'long break length ->';
+      nextLongBreak.textContent = displayTime(longBreakTime);
       timeRemaining = workPeriodTime;
       pause.addEventListener('click', pauseTimer);
       startTimer();
@@ -116,11 +129,12 @@ function shortBreak() {
   }, 1000);
 }
 
-function longBreak() {
+
+function takeLongBreak() {
   onBreak = true;
   pause.removeEventListener('click', pauseTimer);
-  breakText.textContent = "you're on break ->";
-  nextTime.textContent = "relax...";
+  breakText.textContent = "you're on break...";
+  nextBreak.textContent = "relax...";
   timeRemaining = longBreakTime;
 
   const longBreakDecreaser = setInterval(function() {
@@ -129,8 +143,8 @@ function longBreak() {
     if (timeRemaining === 0) {
       audio.play();
       clearInterval(longBreakDecreaser);
-      breakText.textContent = 'next break ->';
-      nextTime.textContent = displayTime(shortBreakTime);
+      breakText.textContent = 'short break length ->';
+      nextBreak.textContent = displayTime(shortBreakTime);
       timeRemaining = workPeriodTime;
       pause.addEventListener('click', pauseTimer);
       startTimer();
@@ -138,57 +152,16 @@ function longBreak() {
   }, 1000);
 }
 
-function changeWorkTime() {
-  let newWorkTime = parseInt(prompt(`Your current working time is ` +
-                             `${displayTime(workPeriodTime)}. ` +
-                             'Please enter a new number of minutes ' +
-                             'for your work periods.'));
-  if (newWorkTime < 2) {
-    alert('That work period is too short.');
-  } else if (newWorkTime > 45) {
-    alert('That work period is too long.');
-  } else if (isNaN(newWorkTime)) {
-    alert('You need to chose an integer for the number of minutes.');
-  }
-
-  if (newWorkTime >= 2 && newWorkTime <= 45) {
-    workPeriodTime = newWorkTime * 60;
-    timeRemaining = workPeriodTime;
-    timer.textContent = displayTime(timeRemaining);
+function changeShortBreak() {
+  shortBreakTime = Number(event.target.value) * 60;
+  if (!onBreak) {
+    nextBreak.textContent = displayTime(shortBreakTime);
   }
 }
 
-function changeBreakTime() {
-  let newBreakTime = parseInt(prompt(`Your current short break time is ` +
-                             `${displayTime(shortBreakTime)}. ` +
-                             'Please enter a new number of minutes ' +
-                             'for your short breaks.'));
-  if (newBreakTime < 1) {
-    alert('That break length is too short.');
-  } else if (newBreakTime > 15) {
-    alert('That break length is too long.');
-  } else if (isNaN(newBreakTime)) {
-    alert('You need to chose an integer for the number of minutes.');
-  }
-
-  if (newBreakTime >= 1 && newBreakTime <= 15) {
-    shortBreakTime = newBreakTime * 60;
-    nextTime.textContent = displayTime(shortBreakTime);
-  }
-
-  let newLongBreakTime = parseInt(prompt(`Your current long break time is ` +
-                             `${displayTime(longBreakTime)}. ` +
-                             'Please enter a new number of minutes ' +
-                             'for your long breaks.'));
-  if (newLongBreakTime < 3) {
-    alert('That break length is too short.');
-  } else if (newLongBreakTime > 30) {
-    alert('That break length is too long.');
-  } else if (isNaN(newLongBreakTime)) {
-    alert('You need to chose an integer for the number of minutes.');
-  }
-
-  if (newLongBreakTime >= 3 && newLongBreakTime <= 30) {
-    longBreakTime = newBreakTime * 60;
+function changeLongBreak() {
+  longBreakTime = Number(event.target.value) * 60;
+  if (!onBreak) {
+    nextLongBreak.textContent = displayTime(longBreakTime);
   }
 }

@@ -26,20 +26,29 @@
 
       <div class="readout"><span id="timeLeft">25:00</span></div>
       <div class="timerMiddle">minutes remaining</div>
-      <div id="breakText" class="break">next break length -></div>
-      <div id="nextTime" class="timeLeft"> 3:00</div>
+      <div id="breakText">short break length -></div>
+      <div id="nextBreak">03:00</div>
+      <div id="longBreakText">long break length -></div>
+      <div id="nextLongBreak">15:00</div>
     </div>
 
-    <div class="buttons">
-      <div class="work">
-        <button type="button" name="button" id="workSet">
-          <span class="adjusters">Set Work Interval</span>
-        </button>
+    <div class="break-buttons">
+      <div class="dropdown">
+        <button class="dropbtn">Set Short Break</button>
+        <div class="dropdown-content">
+          <button id="min3" class="time-button" value="3">3 minutes</button>
+          <button id="min4" class="time-button" value="4">4 minutes</button>
+          <button id="min5" class="time-button" value="5">5 minutes</button>
+        </div>
       </div>
-      <div class="rest">
-        <button type="button" name="button" id="breakSet">
-          <span class="adjusters">Set Break Interval</span>
-        </button>
+      <div class="dropdown-two">
+        <button class="dropbtn-two">Set Long Break</button>
+        <div class="dropdown-content-two">
+          <button id="min15" class="time-button" value="15">15 minutes</button>
+          <button id="min20" class="time-button" value="20">20 minutes</button>
+          <button id="min25" class="time-button" value="25">25 minutes</button>
+          <button id="min30" class="time-button" value="30">30 minutes</button>
+        </div>
       </div>
     </div>
 
