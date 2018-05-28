@@ -71,6 +71,7 @@ body, html {
   justify-self: center;
   margin-top: 40px;
   letter-spacing: -40px;
+  padding-right: 44px;
 }
 
 .timerMiddle {
@@ -79,7 +80,7 @@ body, html {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1em;
   min-width: 150px;
-  padding-left: 81px;
+  padding-left: 57px;
 }
 
 .break {
@@ -148,4 +149,8 @@ button {
 #sButton {
   opacity: 1;
   grid-row: 1;
+}
+
+#nextTime {
+  padding-left: 15px;
 }

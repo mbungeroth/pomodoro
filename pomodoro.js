@@ -7,6 +7,7 @@ const workSet = document.getElementById('workSet');
 const breakSet = document.getElementById('breakSet');
 const brand = document.getElementById('reload');
 const pause = document.getElementById('pButton');
+const audio = new Audio('sounds/ding.wav');
 
 let shortBreakTime = 180;
 let longBreakTime = 900;
@@ -54,12 +55,12 @@ function decreaseTimer() {
 
       if (timeRemaining === 0 && workInterval < 4) {
         clearInterval(decreaser);
-        alert('Stop working! Take a break!');
+        audio.play();
         workInterval++;
         shortBreak();
       } else if (timeRemaining === 0 && workInterval === 4) {
         clearInterval(decreaser);
-        alert('Stop working! Take a break!');
+        audio.play();
         workInterval = 1;
         longBreak();
       }
@@ -91,8 +92,9 @@ function resetTimer() {
 function shortBreak() {
   onBreak = true;
   pause.style.opacity = 0;
-  breakText.textContent = 'next work session ->';
-  nextTime.textContent = displayTime(workPeriodTime);
+  pause.removeEventListener('click', pauseTimer);
+  breakText.textContent = "you're on break ->";
+  nextTime.textContent = "relax...";
   timeRemaining = shortBreakTime;
 
   const breakDecreaser = setInterval(function() {
@@ -100,6 +102,7 @@ function shortBreak() {
     timer.textContent = displayTime(timeRemaining);
     if (timeRemaining === 0) {
       clearInterval(breakDecreaser);
+      audio.play();
       breakText.textContent = 'next break ->';
       if (workInterval < 4) {
         nextTime.textContent = displayTime(shortBreakTime);
@@ -107,6 +110,7 @@ function shortBreak() {
         nextTime.textContent = displayTime(longBreakTime);
       }
       timeRemaining = workPeriodTime;
+      pause.addEventListener('click', pauseTimer);
       startTimer();
     }
   }, 1000);
@@ -114,18 +118,21 @@ function shortBreak() {
 
 function longBreak() {
   onBreak = true;
-  breakText.textContent = 'next work session ->';
-  nextTime.textContent = displayTime(workPeriodTime);
+  pause.removeEventListener('click', pauseTimer);
+  breakText.textContent = "you're on break ->";
+  nextTime.textContent = "relax...";
   timeRemaining = longBreakTime;
 
   const longBreakDecreaser = setInterval(function() {
     timeRemaining -= 1;
     timer.textContent = displayTime(timeRemaining);
     if (timeRemaining === 0) {
+      audio.play();
       clearInterval(longBreakDecreaser);
       breakText.textContent = 'next break ->';
       nextTime.textContent = displayTime(shortBreakTime);
       timeRemaining = workPeriodTime;
+      pause.addEventListener('click', pauseTimer);
       startTimer();
     }
   }, 1000);
